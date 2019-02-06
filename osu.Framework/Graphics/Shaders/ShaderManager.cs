@@ -109,6 +109,7 @@ namespace osu.Framework.Graphics.Shaders
     {
         public const string TEXTURE = "Texture";
         public const string TEXTURE_ROUNDED = "TextureRounded";
+        public const string TEXTURE_MSDF = "TextureMSDF";
         public const string COLOUR = "Colour";
         public const string COLOUR_ROUNDED = "ColourRounded";
         public const string GLOW = "Glow";

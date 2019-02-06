@@ -132,6 +132,8 @@ namespace osu.Framework
             Fonts.AddStore(new GlyphStore(Resources, @"Fonts/OpenSans-Bold"));
             Fonts.AddStore(new GlyphStore(Resources, @"Fonts/OpenSans-Italic"));
             Fonts.AddStore(new GlyphStore(Resources, @"Fonts/OpenSans-BoldItalic"));
+
+            Fonts.AddStore(new GlyphStore(Resources, @"Fonts/OpenSans-MSDF")); // TODO: move this into test case somehow
             dependencies.Cache(Fonts);
 
             Localisation = new LocalisationManager(config);

@@ -27,3 +27,16 @@ vec4 toSRGB(vec4 colour)
 	// The following implementation using mix and step may be faster, but stackoverflow indicates it is in fact a lot slower on some GPUs.
 	//return vec4(mix(colour.rgb * 12.92, 1.055 * pow(colour.rgb, vec3(1.0 / GAMMA)) - vec3(0.055), step(0.0031308, colour.rgb)), colour.a);
 }
+
+void sort2(inout float a0, inout float a1) {
+	float b0 = min(a0, a1);
+	float b1 = max(a0, a1);
+	a0 = b0;
+	a1 = b1;
+}
+
+float median(float a, float b, float c) {
+	sort2(a, b);
+	sort2(b, c);
+	return max(a, b);
+}

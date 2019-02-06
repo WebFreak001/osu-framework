@@ -26,13 +26,39 @@ namespace osu.Framework.Graphics.Sprites
 
             internal readonly List<ScreenSpaceCharacterPart> Parts = new List<ScreenSpaceCharacterPart>();
 
+            internal bool MSDF;
+            internal float TextSize;
+
             private bool needsRoundedShader => GLWrapper.IsMaskingActive;
 
             public override void Draw(Action<TexturedVertex2D> vertexAction)
             {
                 base.Draw(vertexAction);
 
-                Shader shader = needsRoundedShader ? Shared.RoundedTextureShader : Shared.TextureShader;
+                Shader shader;
+                if (MSDF)
+                {
+                    shader = Shared.MSDFTextureShader;
+
+                    // not very accurate for exactly telling the shader how it looks, but it looks pretty good in most cases
+                    // 1 = 2
+                    // 20 = 5
+                    // 70 = 7
+                    // 200 = 10
+                    float x = TextSize;
+                    float size;
+                    if (x <= 10)
+                        size = x / 10.0f * 2.277f;
+                    else if (x <= 20)
+                        size = x / 4.392f;
+                    else
+                        size = (float) (Math.Log10(x) * 3.5);
+                    shader.GetUniform<float>("m_PixelScale").UpdateValue(ref size);
+                }
+                else
+                {
+                    shader = needsRoundedShader ? Shared.RoundedTextureShader : Shared.TextureShader;
+                }
 
                 shader.Bind();
 
@@ -68,6 +94,7 @@ namespace osu.Framework.Graphics.Sprites
         {
             public Shader TextureShader;
             public Shader RoundedTextureShader;
+            public Shader MSDFTextureShader;
         }
 
         /// <summary>

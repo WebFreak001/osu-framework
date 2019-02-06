@@ -113,7 +113,7 @@ namespace osu.Framework.IO.Stores
                     if (x >= c.XOffset && y >= c.YOffset && x - c.XOffset < c.Width && y - c.YOffset < c.Height)
                         pixels[dest] = span[(c.Y + y - c.YOffset) * page.Width + (c.X + x - c.XOffset)];
                     else
-                        pixels[dest] = new Rgba32(255, 255, 255, 0);
+                        pixels[dest] = new Rgba32(0, 0, 0, 0);
                 }
             }
 

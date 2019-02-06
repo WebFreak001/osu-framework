@@ -8,9 +8,9 @@ using osu.Framework.Testing;
 
 namespace osu.Framework.Tests.Visual
 {
-    public class TestCaseSpriteText : TestCase
+    public class TestCaseSpriteTextMSDF : TestCase
     {
-        public TestCaseSpriteText()
+        public TestCaseSpriteTextMSDF()
         {
             FillFlowContainer flow;
 
@@ -34,31 +34,30 @@ namespace osu.Framework.Tests.Visual
 
             flow.Add(new SpriteText
             {
+                MSDF = true,
+                Font = "OpenSans-MSDF",
                 Text = @"the quick red fox jumps over the lazy brown dog"
             });
             flow.Add(new SpriteText
             {
+                MSDF = true,
+                Font = "OpenSans-MSDF",
                 Text = @"THE QUICK RED FOX JUMPS OVER THE LAZY BROWN DOG"
             });
             flow.Add(new SpriteText
             {
+                MSDF = true,
+                Font = "OpenSans-MSDF",
                 Text = @"0123456789!@#$%^&*()_-+-[]{}.,<>;'\"
             });
 
             for (int i = 1; i <= 200; i++)
             {
-                string font = "OpenSans-";
-                // if (i % 4 > 1)
-                //     font += "Bold";
-                // if (i % 2 == 1)
-                //     font += "Italic";
-
-                font = font.TrimEnd('-');
-
                 SpriteText text = new SpriteText
                 {
+                    MSDF = true,
+                    Font = "OpenSans-MSDF",
                     Text = $@"Font testy at size {i}",
-                    Font = font,
                     AllowMultiline = true,
                     RelativeSizeAxes = Axes.X,
                     TextSize = i
@@ -66,6 +65,16 @@ namespace osu.Framework.Tests.Visual
 
                 flow.Add(text);
             }
+
+            flow.Add(new SpriteText
+            {
+                MSDF = true,
+                Font = "OpenSans-MSDF",
+                Text = $@"Font testy at size 1000",
+                AllowMultiline = true,
+                RelativeSizeAxes = Axes.X,
+                TextSize = 1000
+            });
         }
     }
 }

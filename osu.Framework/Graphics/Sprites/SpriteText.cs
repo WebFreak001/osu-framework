@@ -64,6 +64,7 @@ namespace osu.Framework.Graphics.Sprites
             spaceWidth = getTextureForCharacter('.')?.DisplayWidth * 2 ?? 1;
             sharedData.TextureShader = shaders?.Load(VertexShaderDescriptor.TEXTURE_2, FragmentShaderDescriptor.TEXTURE);
             sharedData.RoundedTextureShader = shaders?.Load(VertexShaderDescriptor.TEXTURE_2, FragmentShaderDescriptor.TEXTURE_ROUNDED);
+            sharedData.MSDFTextureShader = shaders?.Load(VertexShaderDescriptor.TEXTURE_2, FragmentShaderDescriptor.TEXTURE_MSDF);
 
             // Pre-cache the characters in the texture store
             foreach (var character in displayedText)
@@ -182,6 +183,24 @@ namespace osu.Framework.Graphics.Sprites
                 if (shadow == value)
                     return;
                 shadow = value;
+
+                Invalidate(Invalidation.DrawNode);
+            }
+        }
+
+        private bool msdf;
+
+        /// <summary>
+        /// True if a msdf should be displayed around the text.
+        /// </summary>
+        public bool MSDF
+        {
+            get => msdf;
+            set
+            {
+                if (msdf == value)
+                    return;
+                msdf = value;
 
                 Invalidate(Invalidation.DrawNode);
             }
@@ -570,6 +589,9 @@ namespace osu.Framework.Graphics.Sprites
 
             n.Parts.Clear();
             n.Parts.AddRange(screenSpaceCharacters);
+
+            n.MSDF = MSDF;
+            n.TextSize = TextSize;
 
             n.Shadow = Shadow;
 

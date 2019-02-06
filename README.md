@@ -2,6 +2,21 @@
 
 A game framework written with [osu!](https://github.com/ppy/osu) in mind.
 
+# Branch information
+
+This branch (msdf) adds multi-channel signed distance field support for fonts which can be used to reduce font resource size while also increasing the quality of the rendered result, especially when upscaling the font.
+
+![https://wfr.moe/f7WNRz.png](https://wfr.moe/f7WNRz.png)
+![https://wfr.moe/f7sOHf.png](https://wfr.moe/f7sOHf.png)
+
+Currently the viewport pixel size is kind of hardcoded into the project and shouldn't be used like this as it will only really look correct on a Full HD resolution and resolutions close to that.
+
+Things that still should be fixed in this branch in the future:
+- Pixel scaling inside shader should get proper values for rendering
+- in GlyphStore it should check for glyphs with zero size because it's currently just crashing there
+- reduce mipmap generation (good result completely without mipmaps would be optimal)
+- smaller font sizes should still look good
+
 # Requirements
 
 - A desktop platform with the [.NET Core SDK 2.2](https://www.microsoft.com/net/learn/get-started) or higher installed.
